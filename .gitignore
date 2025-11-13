@@ -1,0 +1,38 @@
+﻿# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+env/
+.venv/
+
+# ML models (HUGE)
+*.h5
+*.hdf5
+*.pb
+*.tflite
+*.onnx
+*.ckpt*
+checkpoint/
+saved_model/
+
+# Large folders (your exact folders)
+data/
+dataset/
+uploads/
+model/
+
+# Flask
+instance/
+*.log
+
+# OS / editor
+.DS_Store
+Thumbs.db
+
+# Environment files
+*.env
+.env
