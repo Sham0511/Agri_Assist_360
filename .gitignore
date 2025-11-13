@@ -9,7 +9,7 @@ venv/
 env/
 .venv/
 
-# ML models (HUGE)
+# ML models (large files)
 *.h5
 *.hdf5
 *.pb
@@ -19,17 +19,23 @@ env/
 checkpoint/
 saved_model/
 
-# Large folders (your exact folders)
+# Large folders to ignore
 data/
 dataset/
 uploads/
 model/
 
+# Image files (large)
+*.jpg
+*.jpeg
+*.png
+*.webp
+
 # Flask
 instance/
 *.log
 
-# OS / editor
+# OS / Editor junk
 .DS_Store
 Thumbs.db
 
