@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="{{ lang }}">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ crop_name }}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: url('/static/images/home_bg.webp') no-repeat center center fixed;
+      background-size: cover;
+      color: #000;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    .overlay {
+      background-color: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(12px);
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #222;
+      margin-bottom: 30px;
+    }
+
+    .section {
+      margin-bottom: 30px;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.15);
+      transition: background 0.3s;
+    }
+
+    h3 {
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 5px;
+      margin-top: 0;
+    }
+
+    img.preview {
+      width: 100%;
+      max-width: 280px;
+      border-radius: 10px;
+      margin-top: 12px;
+    }
+
+    button, input[type="file"] {
+      margin-top: 10px;
+      padding: 12px 16px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      background: rgba(0, 128, 0, 0.7);
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: rgba(0, 128, 0, 0.9);
+    }
+
+    /* Dark mode */
+    body.dark {
+      color: #fff;
+    }
+
+    body.dark .overlay {
+      background-color: rgba(0, 0, 0, 0.6);
+    }
+
+    body.dark .section {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    body.dark h2,
+    body.dark h3 {
+      color: #fff;
+    }
+
+    body.dark button,
+    body.dark input[type="file"] {
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+    }
+
+    body.dark button:hover {
+      background: rgba(255, 255, 255, 0.4);
+    }
+
+    /* Dark mode toggle */
+    .dark-mode-toggle {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      background: rgba(0, 0, 0, 0.6);
+      color: #fff;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      z-index: 999;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    }
+
+    body.dark .dark-mode-toggle {
+      background: rgba(255, 255, 255, 0.8);
+      color: #000;
+    }
+  </style>
+
+  <script>
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark');
+      localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
+    }
+
+    window.onload = () => {
+      if (localStorage.getItem('theme') === 'dark') {
+        document.body.classList.add('dark');
+      }
+    };
+  </script>
+</head>
+<body>
+  <button class="dark-mode-toggle" onclick="toggleDarkMode()">🌓</button>
+
+  <div class="overlay">
+    <h2>{{ crop_name }}</h2>
+
+    <div class="section">
+      <h3>{{ 'Harvest Season' if lang == 'en' else 'அறுவடை பருவம்' }}</h3>
+      <p>{{ info['season'] }}</p>
+    </div>
+
+    <div class="section">
+      <h3>{{ 'Suitable Soil' if lang == 'en' else 'சரியான மண்' }}</h3>
+      <p>{{ info['soil'] }}</p>
+    </div>
+
+    <div class="section">
+      <h3>{{ 'Profit Info' if lang == 'en' else 'லாப தகவல்' }}</h3>
+      <p>{{ info['profit'] }}</p>
+    </div>
+
+    <div class="section">
+      <h3>{{ 'Gardening Tips' if lang == 'en' else 'தோட்டம் வழிகாட்டி' }}</h3>
+      <p>{{ info['gardening_en'] if lang == 'en' else info['gardening_ta'] }}</p>
+    </div>
+
+    <div class="section">
+      <h3>{{ 'Grow Now Steps' if lang == 'en' else 'வளர்த்தல் வழிமுறைகள்' }}</h3>
+      <p>{{ info['grow_now'] }}</p>
+    </div>
+
+    <div class="section">
+      <h3>{{ 'Check with Camera' if lang == 'en' else 'கேமரா மூலம் பரிசோதிக்கவும்' }}</h3>
+      <form action="/predict?lang={{ lang }}&crop={{ crop_name }}" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept="image/*" capture="environment" required />
+        <img id="preview" class="preview" style="display:none;" />
+        <button type="submit">{{ 'Predict Ripeness' if lang == 'en' else 'பழுத்த நிலையை கணிக்கவும்' }}</button>
+      </form>
+
+      {% if prediction %}
+        <p><strong>{{ 'Result:' if lang == 'en' else 'முடிவு:' }}</strong> {{ prediction }}</p>
+        <img src="{{ url_for('static', filename=img_path) }}" class="preview">
+        <h4>{{ 'Color Graph' if lang == 'en' else 'வண்ண வரைபடம்' }}</h4>
+        <img src="{{ url_for('static', filename=hist_path) }}" class="preview">
+      {% endif %}
+
+      {% if alert_msg %}
+        <p style="color: limegreen;"><strong>{{ alert_msg }}</strong></p>
+      {% endif %}
+    </div>
+  </div>
+
+  <script>
+    document.querySelector('input[type="file"]').addEventListener('change', function(event) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const preview = document.getElementById('preview');
+        preview.src = e.target.result;
+        preview.style.display = 'block';
+      };
+      reader.readAsDataURL(event.target.files[0]);
+    });
+  </script>
+</body>
+</html>

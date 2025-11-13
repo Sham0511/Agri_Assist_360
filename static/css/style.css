@@ -1,0 +1,32 @@
+/* Glass card */
+.card-glass {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+}
+
+/* Buttons */
+.btn-glass {
+  background: rgba(255, 255, 255, 0.3);
+  border: 1px solid #fff;
+  border-radius: 12px;
+  color: #000;
+  transition: all 0.3s ease;
+}
+
+.btn-glass:hover {
+  background: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 8px #fff;
+}
+
+/* Dark mode toggle */
+body.dark-mode {
+  background: #1c1c1c;
+  color: #eee;
+}
+body.dark-mode .card-glass {
+  background: rgba(0, 0, 0, 0.3);
+  color: #fff;
+}

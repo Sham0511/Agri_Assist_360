@@ -1,0 +1,35 @@
+{
+    "Banana": {
+      "season": ["All"],
+      "soil": "Loamy, well-drained",
+      "profit": "High market demand all year",
+      "gardening_en": "Plant in warm, humid conditions with regular watering.",
+      "gardening_ta": "வெப்பமும் ஈரத்தன்மையும் உள்ள இடத்தில் நன்கு நீர் விட்டு நடுங்கள்.",
+      "grow_now": "1. Select sucker → 2. Plant in pit → 3. Apply compost → 4. Water daily"
+    },
+    "Apple": {
+      "season": ["August", "September"],
+      "soil": "Loamy soil with good drainage",
+      "profit": "Moderate to high profit in hilly regions",
+      "gardening_en": "Requires cold climate; prune regularly.",
+      "gardening_ta": "குளிரான காலநிலை தேவை; அடிக்கடி கிளைகள் வெட்டவும்.",
+      "grow_now": "1. Choose sapling → 2. Plant in rows → 3. Fertilize → 4. Harvest in 4 months"
+    },
+    "Mango": {
+      "season": ["March", "April", "May"],
+      "soil": "Alluvial, sandy loam",
+      "profit": "High profit in summer season",
+      "gardening_en": "Needs full sun; deep watering during flowering.",
+      "gardening_ta": "முழு வெயில் தேவை; மலர்வது போது ஆழமான நீர்ப்பாசனம் தேவை.",
+      "grow_now": "1. Graft mango → 2. Prepare pit → 3. Add manure → 4. Monitor pests"
+    },
+    "Tomato": {
+      "season": ["January", "February", "October", "November"],
+      "soil": "Sandy loam rich in organic matter",
+      "profit": "Quick yield; good for kitchen garden",
+      "gardening_en": "Grow in pots with support sticks; harvest in 3 weeks.",
+      "gardening_ta": "கிண்ணத்தில் கம்பியுடன் வளர்க்கவும்; 3 வாரங்களில் அறுவடை செய்யலாம்.",
+      "grow_now": "1. Sow seeds → 2. Transplant after 2 weeks → 3. Support → 4. Harvest"
+    }
+  }
+  
